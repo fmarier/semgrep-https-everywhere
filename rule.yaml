@@ -1,0 +1,17 @@
+rules:
+- id: insecure-http-parameter
+  languages:
+    - cpp
+    - go
+    - javascript
+    - python
+    - ruby
+    - rust
+    - swift
+  message: An insecure HTTP URL is passed as a parameter to this function. Use HTTPS whenever possible.
+  patterns:  
+    - pattern: $FUNC(..., "$STRING", ...)
+    - metavariable-regex:
+        metavariable: '$STRING'
+        regex: '^http://'
+  severity: ERROR
